@@ -1,0 +1,19 @@
+# Production runtime dependencies only — kept lean deliberately.
+# Vercel's Python runtime does NOT tree-shake, so everything listed here is
+# installed and bundled into the deployed function. Streamlit, pytest, and
+# httpx used to live in this file too; that pulled in pandas/pyarrow/tornado/
+# etc. (tens of MB) into every deploy even though the API itself never
+# imports them, which risks hitting Vercel's bundle-size limit and slows
+# every build/cold start for no benefit. They now live in requirements-dev.txt.
+
+# --- API server ---
+fastapi>=0.110,<1
+uvicorn[standard]>=0.27,<1
+python-multipart>=0.0.9,<1   # required by FastAPI for UploadFile/Form parsing
+
+# --- Config & validation ---
+pydantic>=2.6,<3
+pydantic-settings>=2.2,<3
+
+# --- LLM ---
+groq>=0.30,<1

@@ -1,0 +1,11 @@
+# Local development / demo / testing only — NOT installed in production
+# deployments (Vercel, Docker). Install with:
+#   pip install -r requirements.txt -r requirements-dev.txt --break-system-packages
+-r requirements.txt
+
+# --- Demo dashboard (demo_dashboard.py) ---
+streamlit>=1.48,<2
+
+# --- Testing ---
+pytest>=8.0,<9
+httpx>=0.27,<1               # FastAPI TestClient transport
